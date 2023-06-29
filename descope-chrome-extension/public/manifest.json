@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Descope Chrome Extension",
+  "version": "1.0",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Open the popup"
+  },
+  "icons": {
+    "129": "logo192.png"
+  }
+}
