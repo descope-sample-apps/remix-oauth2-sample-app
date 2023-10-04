@@ -10,7 +10,7 @@ import {
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Remix Fusion Auth Demo",
+  title: "Remix Descope Auth Demo",
   viewport: "width=device-width,initial-scale=1",
 });
 

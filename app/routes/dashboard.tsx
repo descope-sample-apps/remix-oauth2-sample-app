@@ -1,22 +1,17 @@
-import type { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { authenticator } from "~/utils/auth.server";
 import type { CSSProperties } from "react";
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const user = await authenticator.isAuthenticated(request, {
-    failureRedirect: "/login",
-  });
-  return user;
-};
+// export const loader: LoaderFunction = async ({ request }) => {
+//   const user = await authenticator.isAuthenticated(request, {
+//     failureRedirect: "/login",
+//   });
+//   return user;
+// };
 
 export default function Dashboard() {
-  const user = useLoaderData();
-
   return (
     <div style={styles.dashboardContainer}>
       <h1 style={styles.title}>User Dashboard</h1>
-      <h2 style={styles.subtitle}>Logged in as {user?.email}</h2>
       <p style={styles.infoText}>The authentication process was successful.</p>
     </div>
   );
@@ -24,7 +19,7 @@ export default function Dashboard() {
 
 const styles: { [key: string]: CSSProperties } = {
   dashboardContainer: {
-    fontFamily: "'Poppins', sans-serif", // Using Poppins font from previous example
+    fontFamily: "'Poppins', sans-serif",
     lineHeight: "1.6",
     maxWidth: "600px",
     margin: "40px auto",

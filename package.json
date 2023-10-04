@@ -3,48 +3,37 @@
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
-    "dev": "remix dev"
+    "dev": "remix build && run-p dev:*",
+    "dev:node": "cross-env NODE_ENV=development LOG_LEVEL=debug nodemon ./server.js --watch ./server.js",
+    "dev:remix": "remix watch",
+    "start": "cross-env NODE_ENV=production node ./server.js"
   },
   "dependencies": {
-    "@prisma/client": "^5.3.1",
-    "@remix-run/node": "^1.6.4",
-    "@remix-run/react": "^1.6.4",
-    "@remix-run/vercel": "^1.6.4",
-    "@vercel/node": "^1.15.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "remix-auth": "^3.6.0",
-    "remix-auth-auth0": "^1.7.0",
-    "remix-auth-oauth2": "^1.9.0",
-    "styled-components": "^6.0.8"
+    "@remix-run/express": "^1.15.0",
+    "@remix-run/node": "^1.15.0",
+    "@remix-run/react": "^1.15.0",
+    "compression": "^1.7.4",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "isbot": "3.6.10",
+    "morgan": "^1.10.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remix-auth": "^3.4.0",
+    "remix-auth-oauth2": "^1.6.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "^1.6.4",
-    "@remix-run/eslint-config": "^1.6.4",
-    "@remix-run/serve": "^1.6.4",
-    "@types/react": "^17.0.45",
-    "@types/react-dom": "^17.0.17",
-    "@typescript-eslint/eslint-plugin": "^6.7.4",
-    "@typescript-eslint/parser": "^6.7.4",
-    "eslint": "^8.15.0",
-    "prisma": "^5.3.1",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
+    "@remix-run/dev": "^1.15.0",
+    "@remix-run/eslint-config": "^1.15.0",
+    "@types/react": "^18.0.38",
+    "@types/react-dom": "^18.0.11",
+    "eslint": "^8.39.0",
+    "nodemon": "^2.0.22",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^4.9.5"
   },
   "engines": {
     "node": ">=14"
-  },
-  "prisma": {
-    "seed": "ts-node prisma/seed.ts"
-  },
-  "type": "commonjs",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js"
-    },
-    "./server-build": {
-      "import": "./server-build.js",
-      "types": "./server-build.d.ts"
-    }
   }
 }

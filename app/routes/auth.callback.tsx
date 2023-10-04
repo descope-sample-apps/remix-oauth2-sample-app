@@ -1,9 +1,8 @@
 import type { LoaderFunction } from "@remix-run/node";
-import { sessionStorage } from "~/session.server";
-import { authenticator } from "~/utils/auth.server";
+import { authenticator } from "~/auth.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  await authenticator.authenticate("descope", request, {
+  await authenticator.authenticate("DescopeAuthenticator", request, {
     successRedirect: "/dashboard",
     failureRedirect: "/login",
   });

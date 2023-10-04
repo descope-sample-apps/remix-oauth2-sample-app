@@ -1,14 +1,22 @@
-import { createCookie, createFileSessionStorage } from "@remix-run/node";
+import {
+    createCookie,
+    createFileSessionStorage,
+} from "@remix-run/node";
 
+// In this example the Cookie is created separately.
 const sessionCookie = createCookie("__session", {
-  secrets: ["r3m1xr0ck5"],
-  sameSite: "lax",
-  httpOnly: true,
+    secrets: ["r3m1xr0ck5"],
+    sameSite: "lax",
+    httpOnly: true,
+    // maxAge: 60,
 });
 
-export const sessionStorage = createFileSessionStorage({
-  dir: "sessions",
-  cookie: sessionCookie,
-});
+export const sessionStorage =
+    createFileSessionStorage({
+        // The root directory where you want to store the files.
+        // Make sure it's writable!
+        dir: "sessions",
+        cookie: sessionCookie,
+    });
 
-export const { getSession, commitSession, destroySession } = sessionStorage;
+export let { getSession, commitSession, destroySession } = sessionStorage;

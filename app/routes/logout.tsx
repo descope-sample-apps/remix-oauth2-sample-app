@@ -1,8 +1,8 @@
 import type { LoaderFunction } from "@remix-run/node";
-import { authenticator } from "~/utils/auth.server";
+import { authenticator } from "~/auth.server";
+export let loader: LoaderFunction = async ({ request }) => {
 
-export const loader: LoaderFunction = async ({ request }) => {
-  await fetch(`${process.env.AUTH_URL}/logout`);
+   await fetch(`https://api.descope.com/oauth2/v1/logout`);
 
-  await authenticator.logout(request, { redirectTo: "/" });
-};
+   await authenticator.logout(request, { redirectTo: "/" });
+  };

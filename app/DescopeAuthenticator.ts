@@ -1,9 +1,9 @@
 import type { StrategyVerifyCallback } from "remix-auth";
+
 import type {
   OAuth2Profile,
   OAuth2StrategyVerifyParams,
 } from "remix-auth-oauth2";
-
 import { OAuth2Strategy } from "remix-auth-oauth2";
 
 export interface DescopeStrategyOptions {
@@ -36,10 +36,9 @@ export class DescopeAuthenticator<User> extends OAuth2Strategy<
   DescopeProfile,
   DescopeExtraParams
 > {
-  name = "descope";
+  name = "DescopeAuthenticator";
 
   private userInfoURL: string;
-  private scope: string;
 
   // We receive our custom options and our verify callback
   constructor(
@@ -62,12 +61,17 @@ export class DescopeAuthenticator<User> extends OAuth2Strategy<
 
     this.userInfoURL = `https://${options.domain}/oauth2/v1/userinfo`;
     this.scope = "openid profile email";
+    this.audience = options.audience;
   }
 
   protected authorizationParams() {
     const urlSearchParams: Record<string, string> = {
       scope: this.scope,
     };
+
+    if (this.audience) {
+      urlSearchParams.audience = this.audience;
+    }
 
     return new URLSearchParams(urlSearchParams);
   }
