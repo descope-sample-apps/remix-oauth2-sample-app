@@ -4,10 +4,12 @@ import { sessionStorage } from "~/session.server";
 
 export let authenticator = new Authenticator(sessionStorage);
 
+export const descopeDomain = process.env.CLIENT_ID?.startsWith('Peu') ? 'api.euc1.descope.com' : `api.descope.com`
+
 authenticator.use(
   new DescopeAuthenticator(
     {
-      domain: `api.descope.com`,
+      domain: descopeDomain,
       clientID: process.env.CLIENT_ID || "",
       clientSecret: process.env.CLIENT_SECRET || "",
       callbackURL: process.env.AUTH_CALLBACK_URL || "http://localhost:3000/auth/callback",
