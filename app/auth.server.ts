@@ -3,16 +3,11 @@ import { DescopeAuthenticator } from "./DescopeAuthenticator.js";
 import { sessionStorage } from "~/session.server";
 
 export let authenticator = new Authenticator(sessionStorage);
-let baseURL = "api.descope.com"
-if (process.env.DESCOPE_PROJECT_ID.length >= 32) {
-  const localURL = process.env.DESCOPE_PROJECT_ID.substring(1, 5)
-  baseURL = [baseURL.slice(0, 4), localURL, ".", baseURL.slice(4)].join('') 
-}
 
 authenticator.use(
   new DescopeAuthenticator(
     {
-      domain: baseURL,
+      domain: DescopeAuthenticator.baseURL,
       clientID: process.env.CLIENT_ID || "",
       clientSecret: process.env.CLIENT_SECRET || "",
       callbackURL: process.env.AUTH_CALLBACK_URL || "http://localhost:3000/auth/callback",
