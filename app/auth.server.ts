@@ -7,7 +7,7 @@ export let authenticator = new Authenticator(sessionStorage);
 authenticator.use(
   new DescopeAuthenticator(
     {
-      domain: `api.descope.com`,
+      domain: DescopeAuthenticator.baseURL,
       clientID: process.env.CLIENT_ID || "",
       clientSecret: process.env.CLIENT_SECRET || "",
       callbackURL: process.env.AUTH_CALLBACK_URL || "http://localhost:3000/auth/callback",

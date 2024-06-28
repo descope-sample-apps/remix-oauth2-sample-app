@@ -39,6 +39,7 @@ export class DescopeAuthenticator<User> extends OAuth2Strategy<
   name = "DescopeAuthenticator";
 
   private userInfoURL: string;
+  static baseURL = "api.descope.com";
 
   // We receive our custom options and our verify callback
   constructor(
@@ -62,6 +63,10 @@ export class DescopeAuthenticator<User> extends OAuth2Strategy<
     this.userInfoURL = `https://${options.domain}/oauth2/v1/userinfo`;
     this.scope = "openid profile email";
     this.audience = options.audience;
+    if (process.env.DESCOPE_PROJECT_ID && process.env.DESCOPE_PROJECT_ID.length >= 32) {
+      const localURL = process.env.DESCOPE_PROJECT_ID.substring(1, 5)
+      DescopeAuthenticator.baseURL = [DescopeAuthenticator.baseURL.slice(0, 4), localURL, ".", DescopeAuthenticator.baseURL.slice(4)].join('')
+    }
   }
 
   protected authorizationParams() {
